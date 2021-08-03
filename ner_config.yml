@@ -1,0 +1,35 @@
+model:
+  tokenizer_path: "./mt5-small/sentencepiece_cn.model" # optional path to your trained tokenizer, will default to model size tokenizer
+  model_file: "./mt5-small/mt5-small-cn.bin"
+#  model_file: "./mt5-small/ner/best_model_0.66289.pkl"
+  model_config: "./mt5-small/config.json"
+  output_model_file: "./mt5-small/ner/"
+
+training:
+  best_f1: -1
+  mode: "test"
+  epochs: 160
+  evaluate_epochs: 1
+  batch_size: 32
+  beam_size: 3
+  max_input_length: 128
+  max_output_length: 128
+  optimizer: adam # sgd
+  learning_rate: 0.0002
+  weight_decay: 0.0
+  reduce_lr_on_bleu_plateau: True
+  patience: 5
+  reduction_factor: 0.1
+  min_lr: 0.000001
+  num_workers: 0
+  shuffle_data: True
+  early_stopping: False
+  evaluate_dev: True
+  use_cuda: True
+  vocab_size: 32598
+#  vocab_size: 250112
+
+data:
+  train_file: "./t5_ner_data/train.tsv"
+  dev_file: "./t5_ner_data/dev.tsv"
+  test_file: "./t5_ner_data/test.json"
